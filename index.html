@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>BR4ZUKO EVENTS</title>
+
+<style>
+body {
+  background: #0a0a0a;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 80px;
+}
+
+h1 {
+  font-size: 60px;
+  color: #ff003c;
+  text-shadow: 0 0 10px red, 0 0 20px orange;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 3px 3px red; }
+  50% { text-shadow: -3px -3px cyan; }
+  100% { text-shadow: 3px 3px red; }
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.bar {
+  background: #222;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.progress {
+  height: 40px;
+  width: 0%;
+  background: linear-gradient(90deg, #ff003c, #ff8a00);
+  transition: width 1s;
+}
+
+.stats {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ff003c;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff8a00;
+}
+</style>
+</head>
+
+<body>
+
+<img src="logo.png" class="logo">
+
+<h1>BR4ZUKO</h1>
+
+<div class="container">
+  <div class="bar">
+    <div id="progress" class="progress"></div>
+  </div>
+
+  <div id="stats" class="stats"></div>
+
+  <a href="https://www.paypal.me/BR4ZUKO11" target="_blank">
+    <button>💰 DONAR</button>
+  </a>
+</div>
+
+<script>
+fetch("meta.json")
+.then(r => r.json())
+.then(data => {
+  let porcentaje = (data.actual / data.meta) * 100;
+  document.getElementById("progress").style.width = porcentaje + "%";
+  document.getElementById("stats").innerText =
+    `${data.actual} USD / ${data.meta} USD (${porcentaje.toFixed(1)}%)`;
+});
+</script>
+
+</body>
+</html>
